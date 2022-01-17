@@ -1,20 +1,11 @@
 package main
 
 import (
-	"go-fundamentos-aplicacao-web/models"
-	"html/template"
+	"go-fundamentos-aplicacao-web/routes"
 	"net/http"
 )
 
-var temp = template.Must(template.ParseGlob("templates/*.html"))
-
 func main() {
-	http.HandleFunc("/", index)
+	routes.CarregaRotas()
 	http.ListenAndServe(":3000", nil)
-}
-
-func index(w http.ResponseWriter, r *http.Request) {
-	todosOsProdutos := models.BuscaTodosOsProdutos()
-
-	temp.ExecuteTemplate(w, "Index", todosOsProdutos)
 }
