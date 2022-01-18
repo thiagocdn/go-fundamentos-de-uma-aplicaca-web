@@ -45,3 +45,8 @@ func BuscaTodosOsProdutos() []Produto {
 
 	return produtos
 }
+
+func CriarNovoProduto(nome, descricao string, preco float64, quantidade int) {
+	db := db.ConectaComBancoDeDados()
+
+}
