@@ -58,3 +58,32 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 
 	temp.ExecuteTemplate(w, "Edit", produto)
 }
+
+func Update(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		id := r.FormValue("id")
+		nome := r.FormValue("nome")
+		descricao := r.FormValue("descricao")
+		preco := r.FormValue("preco")
+		quantidade := r.FormValue("quantidade")
+
+		idInt, err := strconv.Atoi(id)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		precoFloat, err := strconv.ParseFloat(preco, 64)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		quantidadeInt, err := strconv.Atoi(quantidade)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		models.AtualizaProduto(idInt, nome, descricao, precoFloat, quantidadeInt)
+
+		http.Redirect(w, r, "/", 301)
+	}
+}
